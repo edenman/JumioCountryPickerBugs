@@ -4,6 +4,8 @@ import android.Manifest.permission.CAMERA
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
@@ -64,7 +66,7 @@ class MainJumioActivity : AppCompatActivity() {
     if (grantResults[0] == PERMISSION_GRANTED) {
       startIDCapture()
     } else {
-      // TODO show err
+      Toast.makeText(this, "Camera permission denied. Go to settings to fix", LENGTH_SHORT).show()
     }
   }
 
@@ -75,7 +77,7 @@ class MainJumioActivity : AppCompatActivity() {
   fun startIDCapture() {
     val localSDK = sdk
     if (localSDK == null || !initialized) {
-      // TODO show error
+      Toast.makeText(this, "SDK initialization failed", LENGTH_SHORT).show()
       return
     }
     localSDK.setUserReference("my-user-id")
